@@ -68,11 +68,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     UserDefaults.standard.set(userName!, forKey: "accountNo")
                 
                     
-//                    //Navigating to another screen HomePageViewController
+                  //Navigating to another screen HomePageViewController
                     let homePage = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+                   
                     print("Sending value \(userName!)")
-                 homePage.accNumber = userName!
-                 self.navigationController?.pushViewController(homePage, animated: true)
+                   homePage.accNumber = userName!
+                   self.navigationController?.pushViewController(homePage, animated: true)
             //    self.present(homePage, animated: true, completion: nil)
 
                 }
