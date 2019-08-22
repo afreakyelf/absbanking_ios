@@ -13,8 +13,10 @@ import SwiftyJSON
 
 class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
 
-    let ip = "172.20.2.79:9696"
+    //let ip = "172.20.2.79:9696"
+    let ip = "localhost:9595"
 
+    
     var otpVerified : Bool?
     var phoneNumber : Int?
     
@@ -116,6 +118,10 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         UserDefaults.standard.set(newRepwd, forKey: "\(self.phoneNumber!)")
 
+        let url = URL(string: "http://\(ip)/details/updatePasswd?acc_no=\(self.userId.text!)")
+
+        AF.request(url!).validate()
+        
         print("password of \(UserDefaults.standard.string(forKey: "\(self.phoneNumber!)")!) is \(newRepwd)")
         
         let alertController = UIAlertController(title: "Alert", message: "Password Reset Done! Please Login again", preferredStyle: .alert)

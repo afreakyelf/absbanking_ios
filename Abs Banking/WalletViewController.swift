@@ -19,8 +19,8 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var remainingBalance: UILabel!
     
-    let ip = "172.20.2.79:9696"
-
+    let ip = "localhost:9595"
+    //  let ip = "172.20.2.79:9696"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendMoneySegue"{

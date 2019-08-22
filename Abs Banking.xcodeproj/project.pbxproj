@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */; };
 		18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18943020230E7B510038A94F /* FixedDepositViewController.swift */; };
 		189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */; };
 		189A9BF4230DBBA9005A6964 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDeviceVerificationViewController.swift; sourceTree = "<group>"; };
 		18943020230E7B510038A94F /* FixedDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDepositViewController.swift; sourceTree = "<group>"; };
 		189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
 		189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				18A38BC0230986AF0047DD0F /* AppDelegate.swift */,
 				18A38BC2230986AF0047DD0F /* ViewController.swift */,
 				18A38BC4230986AF0047DD0F /* Main.storyboard */,
+				1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */,
 				18D863E1230BC6DD0032BEFF /* HomePageViewController.swift */,
 				18A38BD42309C4560047DD0F /* WalletViewController.swift */,
 				189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */,
@@ -234,6 +237,7 @@
 				18A38BD32309885A0047DD0F /* SignUpViewController.swift in Sources */,
 				189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */,
 				18A38BD52309C4560047DD0F /* WalletViewController.swift in Sources */,
+				1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */,
 				18D863E2230BC6DD0032BEFF /* HomePageViewController.swift in Sources */,
 				18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */,
 				18D863E4230BF0AE0032BEFF /* LoanViewController.swift in Sources */,

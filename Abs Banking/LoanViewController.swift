@@ -41,6 +41,7 @@ class LoanViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
     func emiCal(_ pAmount:Double, _ monthString : Int) -> String{
         let interest: Double = 7/12/100
         let quotient: Double = (pAmount*interest)

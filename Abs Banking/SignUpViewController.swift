@@ -20,8 +20,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var zipCode: UITextField!
     @IBOutlet weak var password: UITextField!
     
-    let ip = "172.20.2.79:9696"
-    
+   // let ip = "172.20.2.79:9696"
+    let ip = "localhost:9595"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,7 +46,7 @@ class SignUpViewController: UIViewController {
         
         
         
-        let signUpQuery = URL(string: "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)")
+        let signUpQuery = URL(string: "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)&passwd=\(passwordText)")
         
         AF.request(signUpQuery!).validate()
         

@@ -115,6 +115,7 @@
                     <connections>
                         <outlet property="password" destination="Xbf-9h-2RJ" id="KzG-EN-JGB"/>
                         <outlet property="userName" destination="pkp-LP-dbL" id="GV7-0Q-3hp"/>
+                        <segue destination="FFz-XT-cQc" kind="show" identifier="newDeviceVerificationSegue" id="SUJ-hL-bS0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OxS-F5-tXM" sceneMemberID="firstResponder"/>
@@ -204,6 +205,7 @@
                                 </state>
                                 <connections>
                                     <action selector="registerUser:" destination="Mca-lI-aUu" eventType="touchUpInside" id="h3c-kn-yPJ"/>
+                                    <segue destination="itS-vA-jgY" kind="show" id="6it-aI-1jh"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cM-HP-hq2">
@@ -525,6 +527,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rlq-eD-TpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5264" y="-520"/>
+        </scene>
+        <!--New Device Verification View Controller-->
+        <scene sceneID="7zb-i6-wxg">
+            <objects>
+                <viewController storyboardIdentifier="NewDeviceVerificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FFz-XT-cQc" customClass="NewDeviceVerificationViewController" customModule="Abs_Banking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TI3-0A-R1D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="009-Jd-q2k">
+                                <rect key="frame" x="20" y="288" width="374" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the Otp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6F-uO-Yc9">
+                                <rect key="frame" x="20" y="253" width="199" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="1" green="0.4265212538" blue="0.044869704220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Looks like you are signin to new device. An OTP has been sent to your registered mobile number." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rBp-fL-K0J">
+                                <rect key="frame" x="53" y="117" width="308" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efe-p9-657">
+                                <rect key="frame" x="180" y="350" width="55" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Verify"/>
+                                <connections>
+                                    <action selector="verifyOtp:" destination="FFz-XT-cQc" eventType="touchUpInside" id="0hE-fd-aCI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="COQ-vD-P1K"/>
+                    </view>
+                    <connections>
+                        <outlet property="otpField" destination="009-Jd-q2k" id="8Ly-sv-o7o"/>
+                        <segue destination="itS-vA-jgY" kind="show" identifier="afterDeviceVerificationSegue" id="DfY-hX-fwN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ov5-xc-Sxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2885.507246376812" y="1194.6428571428571"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="hGx-IG-jVI">
@@ -949,5 +1002,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TNE-EG-OvR"/>
+        <segue reference="DfY-hX-fwN"/>
     </inferredMetricsTieBreakers>
 </document>

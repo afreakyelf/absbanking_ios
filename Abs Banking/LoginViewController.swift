@@ -9,12 +9,15 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import FirebaseAuth
 
 class LoginViewController: UIViewController,UITextFieldDelegate  {
 
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var password: UITextField!
-    let ip = "172.20.2.79:9696"
+    
+    let ip = "localhost:9595"
+//  let ip = "172.20.2.79:9696"
 
     @IBAction func blah(_ sender: Any) {
     }
@@ -30,6 +33,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         self.userName.delegate = self
         self.password.delegate = self
         // Do any additional setup after loading the view.
+
+        
     }
   
     @IBAction func login(_ sender: Any) {
@@ -55,8 +60,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             let defaults = UserDefaults.standard
             
             if defaults.string(forKey: String(self.mobileNumber)) != nil {
+                
                 let passwordd = defaults.string(forKey: String(self.mobileNumber))!
-           
                 print(passwordd)
                 
                 if(passwordd == self.password!.text){
@@ -73,28 +78,77 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                    
                     print("Sending value \(userName!)")
                     homePage.accNumber = userName!
-                   self.navigationController?.pushViewController(homePage, animated: true)
-                  //self.present(homePage, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(homePage, animated: true)
 
+                }else{
+                    
+                    print("Error Matching password")
+                    self.checkPwdInDatabase(userName!,self.password.text!)
+                    
                 }
             
             }else{
                 print("Error")
+
             }
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "phoneNumber" {
-            let S = segue.destination as! ForgotPasswordViewController
-//            S.phoneNumber = mobileNumber
-        }
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         
         self.userName.delegate = self
         self.password.delegate = self
     }
+    
+    func checkPwdInDatabase(_ username: Int,_ pwd : String) {
+        
+        var password : String?
+        let url = URL(string: "http://\(ip)/details/getPasswd?acc_no=\(username)")
+
+        AF.request(url!).responseJSON {
+            (responseData) -> Void in
+            let jsonData = JSON(responseData.data as Any)
+            password = jsonData["passwd"].stringValue
+            print(password!)
+            
+            if(pwd == password!){
+                
+                print("we got it")
+                
+                let alertController = UIAlertController(title: "New Device Verification", message: "Please verify your device on next screen", preferredStyle: UIAlertController.Style.alert)
+                
+                let saveAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { alert -> Void in
+                    
+                    let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
+                    newdevice.mobileNumber = self.mobileNumber
+                    newdevice.password = password!
+                    self.navigationController?.pushViewController(newdevice, animated: true)
+                    
+                    
+                })
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {
+                    (action : UIAlertAction!) -> Void in })
+                
+                alertController.addAction(saveAction)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+                
+            }else{
+                
+                print("Wrong Password")
+            
+            }
+            
+        }
+        
+    }
+    
+  
+    
+
     
 }

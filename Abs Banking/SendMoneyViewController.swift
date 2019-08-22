@@ -16,7 +16,9 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
     var accNumber : Int? = 0
     var accBalance : Int? = 0
     var receiverAcc : Int? = 0
-    let ip = "172.20.2.79:9696"
+    
+    let ip = "localhost:9595"
+    //  let ip = "172.20.2.79:9696"
     
     @IBOutlet weak var TransactionOutlet: UIButton!
     @IBOutlet weak var AmountLAble: UILabel!
