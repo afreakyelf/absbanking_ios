@@ -13,6 +13,7 @@ import SwiftyJSON
 class WalletViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     var accNumber : Int? = 0
+    var accBal : Int? = 0
     var transactionArray = [[String:AnyObject]]()
 
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +21,15 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
     
     let ip = "172.20.2.79:9696"
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sendMoneySegue"{
+            let seg = segue.destination as! SendMoneyViewController
+            seg.accNumber = self.accNumber
+            seg.accBalance = self.accBal
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +42,7 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         self.tableView.delegate = self
         
         loadBalance();
+        
         loadTransactions();
         
         self.tableView.tableFooterView = UIView()
@@ -49,6 +60,7 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
             let swiftJsonVar = JSON(responseData.data as Any)
             let bal = swiftJsonVar["balance"].stringValue
             self.remainingBalance.text = bal
+            self.accBal = Int(bal)
             
         }
         
@@ -78,6 +90,7 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         return self.transactionArray.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "transactionCell", for: indexPath)
         
@@ -89,10 +102,11 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         
         if(dict["toAcc"]! as? Int == accNumber!){
             cell.textLabel?.text = "Received From \(dict["fromAcc"]!)"
+            cell.detailTextLabel?.text = "+\(dict["amount"]!)"
         }else{
             cell.textLabel?.text = "Sent To \(dict["toAcc"]!)"
+            cell.detailTextLabel?.text = "-\(dict["amount"]!)"
         }
-        cell.detailTextLabel?.text = "\(dict["amount"]!)"
         return cell
     }
     
@@ -108,7 +122,6 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         let amount = dict["amount"]
         let date = dict["date"]
         
-        
         let result = "id: \(id!) \nFrom Account: \(fromAcc!)\nTo Account: \(toAcc!)\nAmount: \(amount!) \nDate: \(date!)"
         
         let alertController = UIAlertController(title: "Transaction Details ", message: result, preferredStyle: .alert)
@@ -118,8 +131,12 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         self.present(alertController,animated: true,completion: nil)
         
     }
-
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationItem.title = "Wallet"
+        self.loadBalance()
+        self.loadTransactions()
+    }
  
     
 }

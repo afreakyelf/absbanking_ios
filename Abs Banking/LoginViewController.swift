@@ -19,13 +19,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     @IBAction func blah(_ sender: Any) {
     }
     
-    let tempPassword = "blahblah"
     var mobileNumber = 0
     var pBool = false
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
             
         self.userName.delegate = self
         self.password.delegate = self
@@ -68,12 +68,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     UserDefaults.standard.set(userName!, forKey: "accountNo")
                 
                     
-//                    //Navigating to another screen HomePageViewController
+                  //Navigating to another screen HomePageViewController
                     let homePage = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+                   
                     print("Sending value \(userName!)")
-                 homePage.accNumber = userName!
-                 self.navigationController?.pushViewController(homePage, animated: true)
-            //    self.present(homePage, animated: true, completion: nil)
+                    homePage.accNumber = userName!
+                   self.navigationController?.pushViewController(homePage, animated: true)
+                  //self.present(homePage, animated: true, completion: nil)
 
                 }
             
@@ -82,4 +83,18 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "phoneNumber" {
+            let S = segue.destination as! ForgotPasswordViewController
+//            S.phoneNumber = mobileNumber
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        self.userName.delegate = self
+        self.password.delegate = self
+    }
+    
 }

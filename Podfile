@@ -8,5 +8,6 @@ target 'Abs Banking' do
   # Pods for Abs Banking
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'SwiftyJSON'
+  pod 'Firebase/Auth'
 
 end
