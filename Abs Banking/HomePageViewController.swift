@@ -44,6 +44,13 @@ class HomePageViewController: UIViewController {
             
         else if segue.identifier == "loanSegue" {
             let S = segue.destination as! LoanViewController
+            S.accNumber = accNumber!
+        }
+     
+        else if segue.identifier == "fixedDepositSegue" {
+            let S = segue.destination as! FixedDepositViewController
+            S.accNumber = accNumber!
+
         }
         
     }
