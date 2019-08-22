@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18943020230E7B510038A94F /* FixedDepositViewController.swift */; };
 		189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */; };
 		189A9BF4230DBBA9005A6964 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */; };
 		189A9BF6230DBC2D005A6964 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18943020230E7B510038A94F /* FixedDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDepositViewController.swift; sourceTree = "<group>"; };
 		189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
 		189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				18A11CF3230A9B86001B1636 /* LoginViewController.swift */,
 				18D863E3230BF0AE0032BEFF /* LoanViewController.swift */,
 				189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */,
+				18943020230E7B510038A94F /* FixedDepositViewController.swift */,
 			);
 			path = "Abs Banking";
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */,
 				18A38BD52309C4560047DD0F /* WalletViewController.swift in Sources */,
 				18D863E2230BC6DD0032BEFF /* HomePageViewController.swift in Sources */,
+				18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */,
 				18D863E4230BF0AE0032BEFF /* LoanViewController.swift in Sources */,
 				189A9BF6230DBC2D005A6964 /* ForgotPasswordViewController.swift in Sources */,
 				18A38BC3230986AF0047DD0F /* ViewController.swift in Sources */,
