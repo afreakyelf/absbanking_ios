@@ -9,15 +9,88 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-class LoanViewController: UIViewController {
+import Firebase
+import FirebaseStorage
+class LoanViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     // var array = [[String:AnyObject]]()
     
-    var accNumber : Int? = 0
+    var accNumber : Int? = 10002
     let ip = "172.20.3.109:9696"
-    
+    var name:String=""
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Loan"
+    }
+    
+    @IBAction func UploadAadhar(_ sender: UIButton) {
+        print("in aadhar")
+        name="aadhar"
+        imageUpload()
+    }
+    
+    
+    @IBAction func UploadPan(_ sender: UIButton) {
+        print("in pan")
+        name="pan"
+       // imageUpload()
+        let myPickerController = UIImagePickerController()
+        print(myPickerController)
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+         self.present(myPickerController, animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        print("after")
+    }
+    
+    func imageUpload(){
+        print("dtfygu")
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+         self.present(myPickerController, animated: true, completion: nil)
+        
+       
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // imageview.image = info[.originalImage] as? UIImage
+        var image=info[.originalImage] as! UIImage;
+        //self.dismiss(animated: true, completion: nil)
+        //imageview.image=image
+        self.dismiss(animated: true, completion: nil)
+        let storage = Storage.storage()
+        var data = Data()
+        data = (image.pngData())!;
+        let storageRef = storage.reference()
+        print(storageRef)
+        var imagenameurl="images/\(accNumber!)/"+self.name+".png"
+        //var imagenameurl="images/sec.png"
+        
+        let imageRef=storageRef.child(imagenameurl)
+        imageRef.putData(data,metadata: nil,completion: { (metadata,error) in
+            guard let metadata = metadata else{
+                print(error)
+                return
+            }
+            
+        })
+        print("image url \(imagenameurl)")
+        
+            storageRef.child(imagenameurl).downloadURL(completion: { (url, err) in
+                if let err = err {
+                    print("Error downloading image file, \(err.localizedDescription)")
+                    return
+                }
+                
+                guard let url = url else { print("no url") ; return }
+                print(url)
+                
+                
+            })
+        
+        
+        
+        
+        
     }
     
     @IBOutlet weak var emi: UILabel!
