@@ -6,67 +6,27 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Abs Banking/LoginViewController.swift"
-<<<<<<< HEAD
             timestampString = "588231948.6051331"
-=======
-            timestampString = "588232203.574031"
->>>>>>> e65ccd077b7493ab1988e1ae218e90ba1ec7c168
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
             endingLineNumber = "115"
             landmarkName = "checkPwdInDatabase(_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in Abs_Banking.LoginViewController.checkPwdInDatabase(Swift.Int, Swift.String) -&gt; ()"
-                  moduleName = "Abs Banking"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/absbanking_ios/Abs%20Banking/LoginViewController.swift"
-                  timestampString = "588231340.954955"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "121"
-                  endingLineNumber = "121"
-                  offsetFromSymbolStart = "1802">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in Abs_Banking.LoginViewController.checkPwdInDatabase(Swift.Int, Swift.String) -&gt; ()"
-                  moduleName = "Abs Banking"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/absbanking_ios/Abs%20Banking/LoginViewController.swift"
-                  timestampString = "588231340.9569041"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "113">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Abs Banking/LoginViewController.swift"
-<<<<<<< HEAD
             timestampString = "588231948.6053571"
-=======
-            timestampString = "588232203.574096"
->>>>>>> e65ccd077b7493ab1988e1ae218e90ba1ec7c168
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"

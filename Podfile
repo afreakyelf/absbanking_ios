@@ -9,7 +9,5 @@ target 'Abs Banking' do
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'SwiftyJSON'
   pod 'Firebase/Auth'
-pod 'Firebase/Analytics'
-pod 'Firebase/Storage'
-pod 'GoogleAppMeasurement', '~> 6.1.0'
+
 end

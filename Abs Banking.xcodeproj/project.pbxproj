@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		185B977B230FC2C500B0BD9A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185B977A230FC2C500B0BD9A /* GoogleService-Info.plist */; };
 		1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */; };
 		1876A487230F0C9B00D3D252 /* sent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1876A485230F0C9B00D3D252 /* sent.png */; };
 		1876A488230F0C9B00D3D252 /* receive.png in Resources */ = {isa = PBXBuildFile; fileRef = 1876A486230F0C9B00D3D252 /* receive.png */; };
 		18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18943020230E7B510038A94F /* FixedDepositViewController.swift */; };
 		189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */; };
+		189A9BF4230DBBA9005A6964 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */; };
 		189A9BF6230DBC2D005A6964 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */; };
 		18A11CF4230A9B86001B1636 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A11CF3230A9B86001B1636 /* LoginViewController.swift */; };
 		18A38BC1230986AF0047DD0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A38BC0230986AF0047DD0F /* AppDelegate.swift */; };
@@ -28,12 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		185B977A230FC2C500B0BD9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDeviceVerificationViewController.swift; sourceTree = "<group>"; };
 		1876A485230F0C9B00D3D252 /* sent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sent.png; path = ../../../Downloads/sent.png; sourceTree = "<group>"; };
 		1876A486230F0C9B00D3D252 /* receive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receive.png; path = ../../../Downloads/receive.png; sourceTree = "<group>"; };
 		18943020230E7B510038A94F /* FixedDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDepositViewController.swift; sourceTree = "<group>"; };
 		189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
+		189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		18A11CF3230A9B86001B1636 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18A38BBD230986AF0047DD0F /* Abs Banking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Abs Banking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,12 +94,8 @@
 		18A38BBF230986AF0047DD0F /* Abs Banking */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				1876A486230F0C9B00D3D252 /* receive.png */,
 				1876A485230F0C9B00D3D252 /* sent.png */,
-=======
-				185B977A230FC2C500B0BD9A /* GoogleService-Info.plist */,
->>>>>>> e65ccd077b7493ab1988e1ae218e90ba1ec7c168
 				18A38BC0230986AF0047DD0F /* AppDelegate.swift */,
 				18A38BC2230986AF0047DD0F /* ViewController.swift */,
 				18A38BC4230986AF0047DD0F /* Main.storyboard */,
@@ -110,6 +106,7 @@
 				18A38BC7230986B10047DD0F /* Assets.xcassets */,
 				18A38BC9230986B10047DD0F /* LaunchScreen.storyboard */,
 				18A38BCC230986B10047DD0F /* Info.plist */,
+				189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */,
 				18A38BD22309885A0047DD0F /* SignUpViewController.swift */,
 				18A11CF3230A9B86001B1636 /* LoginViewController.swift */,
 				18D863E3230BF0AE0032BEFF /* LoanViewController.swift */,
@@ -188,14 +185,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A38BCB230986B10047DD0F /* LaunchScreen.storyboard in Resources */,
-<<<<<<< HEAD
 				1876A488230F0C9B00D3D252 /* receive.png in Resources */,
 				1876A487230F0C9B00D3D252 /* sent.png in Resources */,
 				189A9BF4230DBBA9005A6964 /* GoogleService-Info.plist in Resources */,
-=======
->>>>>>> e65ccd077b7493ab1988e1ae218e90ba1ec7c168
 				18A38BC8230986B10047DD0F /* Assets.xcassets in Resources */,
-				185B977B230FC2C500B0BD9A /* GoogleService-Info.plist in Resources */,
 				18A38BC6230986AF0047DD0F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
