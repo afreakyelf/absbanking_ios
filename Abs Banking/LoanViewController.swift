@@ -9,12 +9,13 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+
 class LoanViewController: UIViewController {
     // var array = [[String:AnyObject]]()
     
     var accNumber : Int? = 0
-    let ip = "172.20.3.109:9696"
-    
+    //let ip = "172.20.3.109:9696"
+     let ip = "localhost:9595"
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Loan"
@@ -47,8 +48,8 @@ class LoanViewController: UIViewController {
         let quotient: Double = (pAmount*interest)
         let powerLoan : Double = pow((1+interest),Double(monthString))
         let finalEmi = (quotient*powerLoan)/(powerLoan-1)
-        let totalamount = (Int(finalEmi)*Int(monthString))
-        let tamount = "EMI : ₹ "+String(format : "%.2f",finalEmi)+"        Total Amount : ₹ "+String(Int(totalamount))
+        let totalamount = (Double(finalEmi)*Double(monthString))
+        let tamount = "EMI : ₹ "+String(format : "%.2f",finalEmi)+" | Total Amount : ₹ "+String(format : "%.2f",Double(totalamount))
         return tamount
     }
     
@@ -138,18 +139,20 @@ class LoanViewController: UIViewController {
         AF.request("http://\(self.ip)/loan/getallloanbyid/?acc_num=\(self.accNumber!)").responseJSON { response in
             let jsonData = JSON(response.data as Any)
             print(jsonData)
+            
             if jsonData.isEmpty {
                 self.newloanoulet.isHidden=false
                 self.emi.isHidden=true
             }else{
-                let amount = jsonData["amount"].rawValue
+                let amount = jsonData["amount"].doubleValue
                 print(amount)
-                let months=jsonData["duration"].int
+                let months = jsonData["duration"].intValue
                 self.CurrentLoanLable.text = "\(amount)"
                 self.newloanoulet.isHidden = true
                 self.emi.isHidden=false
-                self.emi.text=self.emiCal(amount as! Double, months as! Int)
+                self.emi.text=self.emiCal(amount, months )
             }
+            
         }
         
     }

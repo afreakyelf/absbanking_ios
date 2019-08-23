@@ -32,7 +32,9 @@ class FixedDepositViewController: UIViewController {
     var years : Int = 0
     let amountToCalculate : Int = 0
     let r : Double = 7.00
-    let ip = "172.20.3.109:9696"
+   // let ip = "172.20.3.109:9696"
+     let ip = "localhost:9595"
+    
     
     override func viewDidLoad() {
         loadFixedDeposit()
@@ -45,12 +47,12 @@ class FixedDepositViewController: UIViewController {
             textField.placeholder = "Enter the amount"
         }
         alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter the Duration in months"
+            textField.placeholder = "Enter the Duration in Years"
         }
         
         let saveAction = UIAlertAction(title: "New Fixed Deposit", style: UIAlertAction.Style.default, handler: { alert -> Void in
             self.CurrentDepositeLable.text=alertController.textFields![0].text
-            var newMonthLoanValue=alertController.textFields![1].text
+            let newMonthLoanValue = alertController.textFields![1].text
             let date=Date();
             let formatter=DateFormatter();
             formatter.dateFormat="dd.MM.yyyy"
@@ -60,6 +62,8 @@ class FixedDepositViewController: UIViewController {
             let url = URL(string: "http://\(self.ip)/fixed/insertfd?acc_no=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dod=\(result1)&duration=\(newMonthLoanValue!)")
             
             AF.request(url!).validate();
+            
+            self.loadFixedDeposit()
             
         })
         
@@ -85,11 +89,11 @@ class FixedDepositViewController: UIViewController {
         DisplaySliderValue.text = String(years)
         
     }
+    
     func cal(_ amount: Int,_ years :Int) -> String{
         let powerfd: Double = pow(1+(r/100),Double(years))
         let finalfd: Double = Double(amount) * powerfd
         return "Total Amount : ₹ "+String(format : "%.2f",finalfd);
-        
     }
     
     @IBAction func CalculateDepositeBtn(_ sender: Any) {
@@ -97,8 +101,6 @@ class FixedDepositViewController: UIViewController {
         {
             years = Int(SliderOutlet.value)
             let amountToCalculate = Int(DepositTextEdit.text!)
-            //let powerfd: Double = pow(1+(r/100),Double(years))
-            // let finalfd: Double = Double(amountToCalculate!) * powerfd
             CalculatedDepositeValue.text = cal(amountToCalculate!, years)
         }
         else{
@@ -117,7 +119,6 @@ class FixedDepositViewController: UIViewController {
                 self.fixedbt.isHidden=false
                 self.totalfdlabel.isHidden=true
             }else{
-                
                 let amount = jsonData["amount"].rawValue
                 print(amount)
                 let yr=jsonData["duration"].rawValue

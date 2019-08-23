@@ -34,8 +34,6 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "transactionCell")
 
         
         self.tableView.dataSource = self
@@ -92,22 +90,31 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "transactionCell", for: indexPath)
         
-        cell = UITableViewCell(style:.subtitle, reuseIdentifier: "transactionCell")
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as!
+            TableViewCell
         
         var dict = transactionArray[indexPath.row]
-        print(dict["amount"]!)
         
         if(dict["toAcc"]! as? Int == accNumber!){
-            cell.textLabel?.text = "Received From \(dict["fromAcc"]!)"
-            cell.detailTextLabel?.text = "+\(dict["amount"]!)"
+            cell.textL?.text = "Received From"
+            cell.accLabel?.text = "\(dict["fromAcc"]!)"
+            cell.valueLabel?.text = "\(dict["amount"]!)"
+            cell.valueLabel?.textColor = UIColor.green
+            cell.imageOutlet.image = UIImage(named: "receive.png")
+            cell.dateLabel.text = "\(dict["date"]!)"
+            
         }else{
-            cell.textLabel?.text = "Sent To \(dict["toAcc"]!)"
-            cell.detailTextLabel?.text = "-\(dict["amount"]!)"
+            cell.valueLabel?.textColor = UIColor.red
+            cell.textL?.text = "Sent To"
+            cell.accLabel?.text = "\(dict["toAcc"]!)"
+            cell.valueLabel?.text = "\(dict["amount"]!)"
+            cell.imageOutlet.image = UIImage(named: "sent.png")
+            cell.dateLabel.text = "\(dict["date"]!)"
         }
+        
         return cell
+        
     }
     
     
@@ -132,11 +139,25 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = "Wallet"
         self.loadBalance()
         self.loadTransactions()
     }
- 
     
 }
+
+class TableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var accLabel: UILabel!
+    @IBOutlet weak var tableviewcell: UIView!
+    @IBOutlet weak var textL: UILabel!
+    @IBOutlet weak var imageOutlet: UIImageView!
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+}
+
