@@ -71,7 +71,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         let urlForAuth = "http://\(ip)/details/getPasswd?acc_no=\(userName!)"
         print(urlForAuth)
         var password : String?
-
+        var acc_no : String?
+        
         let defaults = UserDefaults.standard
 
         
@@ -80,6 +81,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             let jsonData = JSON(responseData.data as Any)
             password = jsonData["passwd"].stringValue
             self.mobileNumber = jsonData["phone"].intValue
+            acc_no = "\(jsonData["acc_no"].intValue)"
             print(self.mobileNumber)
             
             if password! == "" {
@@ -97,8 +99,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     print("same device")
                     let homePage = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
                     
-                    print("Sending value \(userName!)")
-                    homePage.accNumber = userName!
+                    print("Sending value \(acc_no!)")
+                    homePage.accNumber = Int(acc_no!)
                     self.navigationController?.pushViewController(homePage, animated: true)
                     
                     self.animate(0)
@@ -113,7 +115,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     self.loginButton.alpha = 1
                 }
                 
-                UserDefaults.standard.set(userName!, forKey: "accountNo")
+                UserDefaults.standard.set(acc_no!, forKey: "accountNo")
 
                 
             }else{
