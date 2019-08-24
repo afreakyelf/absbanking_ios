@@ -152,8 +152,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     newdevice.mobileNumber = self.mobileNumber
                     newdevice.password = password!
                     self.navigationController?.pushViewController(newdevice, animated: true)
-                    
-                    
+                                        
                 })
                 
                 let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {

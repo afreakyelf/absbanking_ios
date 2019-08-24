@@ -96,8 +96,6 @@
 		18A38BBF230986AF0047DD0F /* Abs Banking */ = {
 			isa = PBXGroup;
 			children = (
-				1876A486230F0C9B00D3D252 /* receive.png */,
-				1876A485230F0C9B00D3D252 /* sent.png */,
 				18A38BC0230986AF0047DD0F /* AppDelegate.swift */,
 				18A38BC2230986AF0047DD0F /* ViewController.swift */,
 				18A38BC4230986AF0047DD0F /* Main.storyboard */,
@@ -106,6 +104,8 @@
 				18A38BD42309C4560047DD0F /* WalletViewController.swift */,
 				189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */,
 				18A38BC7230986B10047DD0F /* Assets.xcassets */,
+				1876A486230F0C9B00D3D252 /* receive.png */,
+				1876A485230F0C9B00D3D252 /* sent.png */,
 				18A38BC9230986B10047DD0F /* LaunchScreen.storyboard */,
 				18A38BCC230986B10047DD0F /* Info.plist */,
 				189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */,
