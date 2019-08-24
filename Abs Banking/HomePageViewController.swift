@@ -27,7 +27,7 @@ class HomePageViewController: UIViewController {
         
         if defaults.integer(forKey: "accountNo") != nil
         {
-            accNumber = defaults.integer(forKey: "accountNo")
+        accNumber = defaults.integer(forKey: "accountNo")
            self.welcomeText.text = "Welcome \(accNumber!)"
         }
 

@@ -32,9 +32,7 @@ class SignUpViewController: UIViewController {
 
     @IBAction func registerUser(_ sender: Any) {
         
-        let defaults = UserDefaults.standard
 
-        
         let firstNameText = firstName.text!
         let lastNameText = lastName.text!
         let phoneText = phone.text!
@@ -48,16 +46,15 @@ class SignUpViewController: UIViewController {
         
         let signUpQuery = URL(string: "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)&passwd=\(passwordText)")
         
-        AF.request(signUpQuery!).validate()
+
+        let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
+        newdevice.mobileNumber = Int(phoneText)
+        newdevice.password = passwordText
+        newdevice.isThisForSignUp = true
+        newdevice.signUpUrl = signUpQuery
+        self.navigationController?.pushViewController(newdevice, animated: true)
         
-        let alertController = UIAlertController(title: "Alert", message: "User Registered!", preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Dismiss" , style: .default))
-        
-        self.present(alertController,animated: true,completion: nil)
-        
-        defaults.set(passwordText, forKey: phoneText)
-        
+
     }
 
 }

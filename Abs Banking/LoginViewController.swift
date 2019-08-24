@@ -12,7 +12,6 @@ import SwiftyJSON
 import FirebaseAuth
 let ip = "localhost:9595"
 
-
 class LoginViewController: UIViewController,UITextFieldDelegate  {
 
     
@@ -51,6 +50,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         
         self.userName.addTarget(self, action: #selector(userNameClick), for: .editingChanged)
         self.password.addTarget(self, action: #selector(passwordClick), for: .editingChanged)
+
         
     }
   
@@ -59,43 +59,44 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         animate(1)
         loginButton.alpha = 0
         
+        let userEnteredPwd = self.password.text!
+        
         let userName = Int(self.userName.text!)
         
         if userName == nil {
             return
         }
         
-        let url = "http://\(ip)/details/checkRegister?acc_no=\(userName!)"
-        print(url)
-        var trya : Bool?
+        //let url = "http://\(ip)/details/checkRegister?acc_no=\(userName!)"
+        let urlForAuth = "http://\(ip)/details/getPasswd?acc_no=\(userName!)"
+        print(urlForAuth)
+        var password : String?
+
+        let defaults = UserDefaults.standard
+
         
-        AF.request(url).responseJSON {
+        AF.request(urlForAuth).responseJSON {
             (responseData) -> Void in
             let jsonData = JSON(responseData.data as Any)
-            trya = jsonData["isExist"].boolValue
-            print("####\(trya!)")
+            password = jsonData["passwd"].stringValue
             self.mobileNumber = jsonData["phone"].intValue
             print(self.mobileNumber)
             
-            let defaults = UserDefaults.standard
-            
-            if defaults.string(forKey: String(self.mobileNumber)) != nil {
+            if password! == "" {
+                print("Enter does not exist")
+                self.animate(0)
+                self.loginButton.alpha = 1
+                self.userdnne.alpha = 1
+
+            }else if password! ==  userEnteredPwd {
                 
                 let passwordd = defaults.string(forKey: String(self.mobileNumber))!
                 print(passwordd)
                 
-                if(passwordd == self.password!.text){
-                    print("Success")
-                    
-                    //self.performSegue(withIdentifier: "loginSegue", sender: self)
-                    
-                    print(userName!)
-                    UserDefaults.standard.set(userName!, forKey: "accountNo")
-                
-                    
-                  //Navigating to another screen HomePageViewController
+                if(passwordd == userEnteredPwd ){
+                    print("same device")
                     let homePage = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
-                   
+                    
                     print("Sending value \(userName!)")
                     homePage.accNumber = userName!
                     self.navigationController?.pushViewController(homePage, animated: true)
@@ -103,22 +104,23 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     self.animate(0)
                     self.loginButton.alpha = 1
                     
-
                 }else{
-                    
+                    print("New device")
                     print("Error Matching password")
-                    self.checkPwdInDatabase(userName!,self.password.text!)
+                    self.verifyDevice(self.mobileNumber,userEnteredPwd)
                     
                     self.animate(0)
                     self.loginButton.alpha = 1
-                    
                 }
-            
+                
+                UserDefaults.standard.set(userName!, forKey: "accountNo")
+
+                
             }else{
                 print("Error")
                 self.animate(0)
                 self.loginButton.alpha = 1
-                self.userdnne.alpha = 1
+                self.wrongpass.alpha = 1
             }
         }
     }
@@ -128,53 +130,33 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         
         self.userName.delegate = self
         self.password.delegate = self
+        
     }
     
-    func checkPwdInDatabase(_ username: Int,_ pwd : String) {
+    func verifyDevice(_ username: Int,_ pwd : String) {
         
-        var password : String?
-        let url = URL(string: "http://\(ip)/details/getPasswd?acc_no=\(username)")
+        let alertController = UIAlertController(title: "New Device Verification", message: "Please verify your device on next screen", preferredStyle: UIAlertController.Style.alert)
+        
+        let saveAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            
+            let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
+            newdevice.mobileNumber = username
+            newdevice.password = pwd
+            self.navigationController?.pushViewController(newdevice, animated: true)
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {
+            (action : UIAlertAction!) -> Void in })
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        
+    }
 
-        AF.request(url!).responseJSON {
-            (responseData) -> Void in
-            let jsonData = JSON(responseData.data as Any)
-            password = jsonData["passwd"].stringValue
-            print(password!)
-            
-            if(pwd == password!){
-                
-                print("we got it")
-                
-                let alertController = UIAlertController(title: "New Device Verification", message: "Please verify your device on next screen", preferredStyle: UIAlertController.Style.alert)
-                
-                let saveAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { alert -> Void in
-                    
-                    let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
-                    newdevice.mobileNumber = self.mobileNumber
-                    newdevice.password = password!
-                    self.navigationController?.pushViewController(newdevice, animated: true)
-                                        
-                })
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {
-                    (action : UIAlertAction!) -> Void in })
-                
-                alertController.addAction(saveAction)
-                alertController.addAction(cancelAction)
-                
-                self.present(alertController, animated: true, completion: nil)
-                
-                
-            }else{
-                
-                print("Wrong Password")
-                self.wrongpass.alpha = 1
-            }
-            
-        }
-        
-    }
-    
   
     func animate(_ int : Int){
         self.loginIndicator.alpha = CGFloat(int)

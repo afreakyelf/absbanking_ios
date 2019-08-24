@@ -8,11 +8,15 @@
 
 import UIKit
 import FirebaseAuth
+import Alamofire
+
 
 class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate {
 
     var mobileNumber : Int?
     var password : String?
+    var isThisForSignUp : Bool? = false
+    var signUpUrl : URL?
     
     @IBOutlet weak var otpField: UITextField!
     override func viewDidLoad() {
@@ -43,9 +47,18 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
             print("Success")
             UserDefaults.standard.set(self.password!, forKey: "\(self.mobileNumber!)")
             
-            self.navigationController?.popViewController(animated: true)
-            
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: LoginViewController.self) {
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
         }
+        
+        if isThisForSignUp!{
+            AF.request(self.signUpUrl!).validate()
+        }
+        
         
     }
     

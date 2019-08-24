@@ -227,7 +227,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registerUser:" destination="Mca-lI-aUu" eventType="touchUpInside" id="h3c-kn-yPJ"/>
-                                    <segue destination="itS-vA-jgY" kind="show" id="6it-aI-1jh"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cM-HP-hq2">
@@ -1188,7 +1187,4 @@
         <image name="logo2.jpg" width="16" height="16"/>
         <image name="sent.png" width="409.60000610351562" height="409.60000610351562"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="AP5-IK-rAa"/>
-    </inferredMetricsTieBreakers>
 </document>
