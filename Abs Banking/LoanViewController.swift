@@ -15,7 +15,7 @@ class LoanViewController: UIViewController {
     
     var accNumber : Int? = 0
     //let ip = "172.20.3.109:9696"
-     let ip = "localhost:9595"
+   //  let ip = "localhost:9595"
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Loan"
@@ -104,7 +104,7 @@ class LoanViewController: UIViewController {
             print(newMonthLoanValue!)
             
             //var newloanoulet.alpha=0
-            let url = URL(string: "http://\(self.ip)/loan/insertloan/?accNum=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dol=\(result1)&duration=\(newMonthLoanValue!)")
+            let url = URL(string: "http://\(ip)/loan/insertloan/?accNum=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dol=\(result1)&duration=\(newMonthLoanValue!)")
             //   print(url ?? <#default value#>);
             AF.request(url!).validate();
             
@@ -136,7 +136,7 @@ class LoanViewController: UIViewController {
     
     func loadLoan(){
         
-        AF.request("http://\(self.ip)/loan/getallloanbyid/?acc_num=\(self.accNumber!)").responseJSON { response in
+        AF.request("http://\(ip)/loan/getallloanbyid/?acc_num=\(self.accNumber!)").responseJSON { response in
             let jsonData = JSON(response.data as Any)
             print(jsonData)
             

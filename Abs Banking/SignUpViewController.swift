@@ -21,7 +21,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
    // let ip = "172.20.2.79:9696"
-    let ip = "localhost:9595"
+  //  let ip = "localhost:9595"
 
     override func viewDidLoad() {
         super.viewDidLoad()

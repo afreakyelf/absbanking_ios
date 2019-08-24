@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import FirebaseAuth
+let ip = "localhost:9595"
+
 
 class LoginViewController: UIViewController,UITextFieldDelegate  {
 
@@ -23,7 +25,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     @IBOutlet weak var loginButton: UIButton!
     
     
-    let ip = "localhost:9595"
 //  let ip = "172.20.2.79:9696"
 
     @IBAction func blah(_ sender: Any) {

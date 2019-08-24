@@ -33,7 +33,7 @@ class FixedDepositViewController: UIViewController {
     let amountToCalculate : Int = 0
     let r : Double = 7.00
    // let ip = "172.20.3.109:9696"
-     let ip = "localhost:9595"
+  //   let ip = "localhost:9595"
     
     
     override func viewDidLoad() {
@@ -59,7 +59,7 @@ class FixedDepositViewController: UIViewController {
             let result1=formatter.string(from: date)
             print(result1)
             
-            let url = URL(string: "http://\(self.ip)/fixed/insertfd?acc_no=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dod=\(result1)&duration=\(newMonthLoanValue!)")
+            let url = URL(string: "http://\(ip)/fixed/insertfd?acc_no=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dod=\(result1)&duration=\(newMonthLoanValue!)")
             
             AF.request(url!).validate();
             
