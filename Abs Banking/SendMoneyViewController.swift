@@ -93,14 +93,33 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
             
             let url = URL(string: "http://\(ip)/transactions/makeTransaction?amount=\(amount)&from_acc=\(accNumber!)&to_acc=\(receiverAcc!)")
             
-            AF.request(url!).validate()
-            
-            let alertController = UIAlertController(title: "Alert", message: "Transaction Done!", preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(title:"Dismiss", style: .default, handler:  { action in self.navigationController?.popViewController(animated: true)}))
+         //   AF.request(url!).validate()
+           
+            AF.request(url!).responseJSON {
+                (responseData) -> Void in
+                let jsonData = JSON(responseData.data as Any)
+                let id = jsonData["id"].intValue
+                let fromAcc = jsonData["fromAcc"].intValue
+                let toAcc = jsonData["toAcc"].intValue
+                let amount = jsonData["amount"].intValue
+                let date = jsonData["date"].stringValue
+        
+                
+               let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let myAlert = storyboard.instantiateViewController(withIdentifier: "TransactionDoneViewController") as! TransactionDoneViewController
+               myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                myAlert.amountText = amount
+                myAlert.dateText = date
+                myAlert.toText = toAcc
+                myAlert.fromAcc = fromAcc
+                myAlert.transactionId = id
+              //  self.present(myAlert, animated: true, completion: nil)
+                self.navigationController?.pushViewController(myAlert, animated: true)
+                
+            }
 
-            self.present(alertController, animated: true, completion: nil)
-
+            
             
         }else{
             print("Poor boy")
@@ -128,8 +147,6 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
         self.noteTextView.alpha = 0
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
+
     
 }

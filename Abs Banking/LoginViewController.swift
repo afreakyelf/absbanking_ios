@@ -13,8 +13,15 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController,UITextFieldDelegate  {
 
+    
+    @IBOutlet weak var wrongpass: UILabel!
+    @IBOutlet weak var userdnne: UILabel!
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var loginIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
     
     let ip = "localhost:9595"
 //  let ip = "172.20.2.79:9696"
@@ -29,15 +36,27 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        loginIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        loginIndicator.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+        
+        
+        loginIndicator.color = UIColor.white
             
         self.userName.delegate = self
         self.password.delegate = self
         // Do any additional setup after loading the view.
-
+        
+        self.userName.addTarget(self, action: #selector(userNameClick), for: .editingChanged)
+        self.password.addTarget(self, action: #selector(passwordClick), for: .editingChanged)
         
     }
   
     @IBAction func login(_ sender: Any) {
+        
+        animate(1)
+        loginButton.alpha = 0
         
         let userName = Int(self.userName.text!)
         
@@ -79,17 +98,26 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                     print("Sending value \(userName!)")
                     homePage.accNumber = userName!
                     self.navigationController?.pushViewController(homePage, animated: true)
+                    
+                    self.animate(0)
+                    self.loginButton.alpha = 1
+                    
 
                 }else{
                     
                     print("Error Matching password")
                     self.checkPwdInDatabase(userName!,self.password.text!)
                     
+                    self.animate(0)
+                    self.loginButton.alpha = 1
+                    
                 }
             
             }else{
                 print("Error")
-
+                self.animate(0)
+                self.loginButton.alpha = 1
+                self.userdnne.alpha = 1
             }
         }
     }
@@ -140,7 +168,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             }else{
                 
                 print("Wrong Password")
-            
+                self.wrongpass.alpha = 1
             }
             
         }
@@ -148,7 +176,22 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     }
     
   
-    
+    func animate(_ int : Int){
+        self.loginIndicator.alpha = CGFloat(int)
+        if(int==1){
+            self.loginIndicator.startAnimating()
+        }else{
+            self.loginIndicator.stopAnimating()
+        }
+    }
 
+    @objc
+    func userNameClick(_ userName : UITextField){
+        self.userdnne.alpha = 0
+    }
     
+    @objc
+    func passwordClick(_ password : UITextField){
+        self.wrongpass.alpha = 0
+    }
 }

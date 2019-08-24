@@ -10,6 +10,7 @@
 		1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */; };
 		1876A487230F0C9B00D3D252 /* sent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1876A485230F0C9B00D3D252 /* sent.png */; };
 		1876A488230F0C9B00D3D252 /* receive.png in Resources */ = {isa = PBXBuildFile; fileRef = 1876A486230F0C9B00D3D252 /* receive.png */; };
+		188B8929230FF7570061D607 /* TransactionDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B8928230FF7570061D607 /* TransactionDoneViewController.swift */; };
 		18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18943020230E7B510038A94F /* FixedDepositViewController.swift */; };
 		189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */; };
 		189A9BF4230DBBA9005A6964 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */; };
@@ -31,6 +32,7 @@
 		1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDeviceVerificationViewController.swift; sourceTree = "<group>"; };
 		1876A485230F0C9B00D3D252 /* sent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sent.png; path = ../../../Downloads/sent.png; sourceTree = "<group>"; };
 		1876A486230F0C9B00D3D252 /* receive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = receive.png; path = ../../../Downloads/receive.png; sourceTree = "<group>"; };
+		188B8928230FF7570061D607 /* TransactionDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDoneViewController.swift; sourceTree = "<group>"; };
 		18943020230E7B510038A94F /* FixedDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDepositViewController.swift; sourceTree = "<group>"; };
 		189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
 		189A9BF3230DBBA8005A6964 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				18D863E3230BF0AE0032BEFF /* LoanViewController.swift */,
 				189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */,
 				18943020230E7B510038A94F /* FixedDepositViewController.swift */,
+				188B8928230FF7570061D607 /* TransactionDoneViewController.swift */,
 			);
 			path = "Abs Banking";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A38BD32309885A0047DD0F /* SignUpViewController.swift in Sources */,
+				188B8929230FF7570061D607 /* TransactionDoneViewController.swift in Sources */,
 				189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */,
 				18A38BD52309C4560047DD0F /* WalletViewController.swift in Sources */,
 				1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */,
