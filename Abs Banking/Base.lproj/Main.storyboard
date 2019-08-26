@@ -260,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIz-8k-Bav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1875" y="1138"/>
+            <point key="canvasLocation" x="1873.913043478261" y="1137.7232142857142"/>
         </scene>
         <!--Wallet View Controller-->
         <scene sceneID="6x1-B7-D3c">

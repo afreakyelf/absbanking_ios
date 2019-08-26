@@ -22,13 +22,14 @@ class SignUpViewController: UIViewController {
     
    // let ip = "172.20.2.79:9696"
   //  let ip = "localhost:9595"
+    
+    let datePickerView : UIDatePicker = UIDatePicker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        chooseDate()
         // Do any additional setup after loading the view.
     }
-    
 
     @IBAction func registerUser(_ sender: Any) {
         
@@ -42,7 +43,7 @@ class SignUpViewController: UIViewController {
         let zipCodeText = zipCode.text!
         let passwordText = password.text!
         
-        
+
         
         let signUpQuery = URL(string: "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)&passwd=\(passwordText)")
         
@@ -53,8 +54,31 @@ class SignUpViewController: UIViewController {
         newdevice.isThisForSignUp = true
         newdevice.signUpUrl = signUpQuery
         self.navigationController?.pushViewController(newdevice, animated: true)
+    }
+    
+    
+     func chooseDate() {
+        let calendar = Calendar(identifier: .gregorian)
+        var dateComponent = DateComponents()
+        dateComponent.year = -18
+        let maxDate = calendar.date(byAdding: dateComponent, to: Date())
+        datePickerView.maximumDate = maxDate
+        datePickerView.datePickerMode = .date
+        dob.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControl.Event.valueChanged)
         
-
+    }
+    
+    // Make a dateFormatter in which format you would like to display the selected date in the textfield.
+    @objc
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+                
+        dob.text = dateFormatter.string(from: datePickerView.date)
+        
     }
 
 }
