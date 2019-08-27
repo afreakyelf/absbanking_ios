@@ -12,6 +12,16 @@ import SwiftyJSON
 import FirebaseAuth
 let ip = "localhost:9595"
 
+func checkInternet(_ viewcontroller: UIViewController){
+    if !NetworkHelper.isConnectedToNetwork(){
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check you mobile data or Wifi", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.destructive, handler: nil))
+        viewcontroller.self.present(alert, animated: true, completion: nil)
+        return
+    }
+}
+
+
 class LoginViewController: UIViewController,UITextFieldDelegate  {
 
     
@@ -29,12 +39,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     @IBAction func blah(_ sender: Any) {
     }
     
+    
     var mobileNumber = 0
     var pBool = false
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkInternet(self)
+
+        
         //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         loginIndicator.style = UIActivityIndicatorView.Style.whiteLarge
@@ -56,6 +71,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
   
     @IBAction func login(_ sender: Any) {
         
+        checkInternet(self)
+
+        
         animate(1)
         loginButton.alpha = 0
         
@@ -67,7 +85,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             return
         }
         
-        //let url = "http://\(ip)/details/checkRegister?acc_no=\(userName!)"
         let urlForAuth = "http://\(ip)/details/getPasswd?acc_no=\(userName!)"
         print(urlForAuth)
         var password : String?
@@ -92,9 +109,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
 
             }else if password! ==  userEnteredPwd {
                 
-                let passwordd = defaults.string(forKey: String(self.mobileNumber))!
-                print(passwordd)
+                var passwordd : String?
                 
+                if defaults.string(forKey: String(self.mobileNumber)) != nil {
+                    passwordd = defaults.string(forKey: String(self.mobileNumber))!
+                    print(passwordd!)
+                }
+    
                 if(passwordd == userEnteredPwd ){
                     print("same device")
                     let homePage = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController

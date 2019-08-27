@@ -31,6 +31,10 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var createBtn: UIButton!
     
     override func viewDidLoad() {
+        
+        checkInternet(self)
+
+        
         super.viewDidLoad()
         otptextField.delegate = self
         newPassword.delegate = self
@@ -43,6 +47,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
 
 
     @IBAction func sendOtp(_ sender: Any) {
+        
+        checkInternet(self)
+
         
         let userName = Int(self.userId.text!)
         
@@ -82,6 +89,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func verify(_ sender: Any) {
         
+        checkInternet(self)
+
+        
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         
         print(verificationID!)
@@ -108,6 +118,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func createPassword(_ sender: Any) {
+        
+        checkInternet(self)
+
         
         let newpwd = self.newPassword.text!
         let newRepwd = self.newRePassword.text!

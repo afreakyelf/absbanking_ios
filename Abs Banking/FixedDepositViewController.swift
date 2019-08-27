@@ -37,10 +37,15 @@ class FixedDepositViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        checkInternet(self)
+
         loadFixedDeposit()
     }
     
     @IBAction func DepositButton(_ sender: UIButton) {
+        
+        checkInternet(self)
+
         
         let alertController = UIAlertController(title: "Make a fixed Deposit", message: "", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField { (textField : UITextField!) -> Void in

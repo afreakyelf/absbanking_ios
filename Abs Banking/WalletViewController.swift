@@ -34,7 +34,8 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        
+        checkInternet(self)
+
         self.tableView.dataSource = self
         self.tableView.delegate = self
         

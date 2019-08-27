@@ -26,7 +26,7 @@ class TransactionDoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.amount.text = "\(amountText!)"
         self.date.text = "\(stringToDate(dateText!,1))"
         self.to.text = "\(toText!)"

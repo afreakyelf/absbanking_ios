@@ -27,12 +27,18 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkInternet(self)
+
+        
         chooseDate()
         // Do any additional setup after loading the view.
     }
 
     @IBAction func registerUser(_ sender: Any) {
         
+        checkInternet(self)
+
 
         let firstNameText = firstName.text!
         let lastNameText = lastName.text!

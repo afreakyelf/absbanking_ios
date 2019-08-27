@@ -20,7 +20,10 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
     
     @IBOutlet weak var otpField: UITextField!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+
+        checkInternet(self)
 
         self.otpField.delegate = self
         
@@ -31,6 +34,9 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
     
 
     @IBAction func verifyOtp(_ sender: Any) {
+        
+        checkInternet(self)
+
         
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         print(verificationID!)
@@ -45,6 +51,7 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
                 return
             }
             print("Success")
+            
             UserDefaults.standard.set(self.password!, forKey: "\(self.mobileNumber!)")
             
             for controller in self.navigationController!.viewControllers as Array {

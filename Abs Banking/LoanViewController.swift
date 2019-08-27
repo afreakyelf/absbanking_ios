@@ -9,18 +9,26 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Firebase
+import FirebaseStorage
 
-class LoanViewController: UIViewController {
-    // var array = [[String:AnyObject]]()
+class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavigationControllerDelegate{
+    var name:String=""
     
     var accNumber : Int? = 0
-    //let ip = "172.20.3.109:9696"
-   //  let ip = "localhost:9595"
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Loan"
     }
     
+    
+    @IBOutlet weak var panUploaded: UILabel!
+    @IBOutlet weak var panProgress: UIActivityIndicatorView!
+    @IBOutlet weak var aadharProgress: UIActivityIndicatorView!
+    @IBOutlet weak var aadharUploaded: UILabel!
+    @IBOutlet weak var uploadPanBtn: UIButton!
+    @IBOutlet weak var uploadAadharBtn: UIButton!
     @IBOutlet weak var emi: UILabel!
     @IBOutlet weak var CurrentLoanLable: UILabel!
     @IBOutlet weak var DisplayCalculatedLoan: UILabel!
@@ -29,12 +37,30 @@ class LoanViewController: UIViewController {
     @IBOutlet weak var DisplaySliderValue: UILabel!
     @IBOutlet weak var newloanoulet: UIButton!
     
+    var isAadharUploaded : Bool? = false
+    var isPanUploaded : Bool? = false
+    
     let monthString :Int = 0
     let currentLoanvalue:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkInternet(self)
         loadLoan()
+        checkForDocuments()
+        
+        panProgress.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        panProgress.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+    
+        panProgress.color = UIColor.white
+        
+        aadharProgress.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        aadharProgress.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+        
+        aadharProgress.color = UIColor.white
+        
     }
     
     func showAlert() {
@@ -61,11 +87,7 @@ class LoanViewController: UIViewController {
             let pAmount = AmountTextField.text
             let pAmount1 = NSString(string: pAmount!).doubleValue
             let monthString = Int(LoanSlider.value)
-            //  let interest: Double = 7/12/100
-            // let quotient: Double = (pAmount1*interest)
-            // let powerLoan : Double = pow((1+interest),Double(monthString))
-            // let finalEmi = (quotient*powerLoan)/(powerLoan-1)
-            // let totalamount = (Int(finalEmi)*Int(monthString))
+         
             DisplayCalculatedLoan.text = emiCal(pAmount1,monthString)
         }
         else
@@ -85,6 +107,19 @@ class LoanViewController: UIViewController {
     
     
     @IBAction func NewLoneActionBtn(_ sender: Any) {
+        
+        checkInternet(self)
+
+        
+        let pleaseAlert = UIAlertController(title: "Alert", message: "Please Upload Mandatory Documents", preferredStyle: .alert)
+        pleaseAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        
+        if !(self.isPanUploaded! == true && self.isAadharUploaded! == true){
+            let pleaseAlert = UIAlertController(title: "Alert", message: "Please Upload Mandatory Documents", preferredStyle: .alert)
+            pleaseAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(pleaseAlert,animated: true,completion: nil)
+            return
+        }
         
         let alertController = UIAlertController(title: "Get A New Loan", message: "", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
@@ -123,17 +158,7 @@ class LoanViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+
     func loadLoan(){
         
         AF.request("http://\(ip)/loan/getallloanbyid/?acc_num=\(self.accNumber!)").responseJSON { response in
@@ -156,5 +181,204 @@ class LoanViewController: UIViewController {
         }
         
     }
+    
+    
+    @IBAction func UploadAadhar(_ sender: UIButton) {
+        
+        checkInternet(self)
+
+        
+        print("in aadhar")
+        name="aadhar"
+        
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.present(myPickerController, animated: true, completion: nil)
+        animate(name, 1)
+    }
+    
+    
+    @IBAction func UploadPan(_ sender: UIButton) {
+        
+        checkInternet(self)
+        
+        print("in pan")
+        name="pan"
+        // imageUpload()
+        let myPickerController = UIImagePickerController()
+        print(myPickerController)
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+        self.present(myPickerController, animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        print("after")
+        animate(name, 1)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // imageview.image = info[.originalImage] as? UIImage
+        let image=info[.originalImage] as! UIImage;
+        //self.dismiss(animated: true, completion: nil)
+        //imageview.image=image
+        self.dismiss(animated: true, completion: nil)
+        let storage = Storage.storage()
+        var data = Data()
+        data = (image.pngData())!;
+        let storageRef = storage.reference()
+        print(storageRef)
+        let imagenameurl="images/\(accNumber!)/"+self.name+".png"
+        //var imagenameurl="images/sec.png"
+        
+        let imageRef=storageRef.child(imagenameurl)
+        
+        imageRef.putData(data,metadata: nil,completion: { (metadata,error) in
+            guard metadata != nil else{
+                print(error as Any)
+                return
+            }
+            
+            
+            imageRef.downloadURL(completion: { (url, err) in
+                
+                if let err = err {
+                    print("Error downloading image file, \(err.localizedDescription)")
+                    return
+                }
+                
+                guard let url = url else { print("no url") ; return }
+                
+                var stringUrl : String?
+                
+                print(url)
+                stringUrl = url.absoluteString.replacingOccurrences(of: "&", with: "@$")
+                stringUrl = stringUrl!.replacingOccurrences(of: "%2F", with: "@")
+                
+                print(stringUrl!)
+                
+                let urlToFetch = URL(string: "http://\(ip)/details/set\(self.name)Image?acc_no=\(self.accNumber!)&\(self.name)_url=\(stringUrl!)")
+                
+                print(urlToFetch!)
+                
+                AF.request(urlToFetch!).validate();
+                
+                self.hideButton(which: self.name, hide: true)
+                
+                self.animate(self.name, 0)
+                
+                if self.name == "aadhar"{
+                    self.isAadharUploaded = true
+                }else if self.name == "pan" {
+                    self.isPanUploaded = true
+                }
+                
+            })
+            
+        })
+        
+        print("image url \(imagenameurl)")
+       
+        
+    }
+    
+    func hideButton( which : String , hide : Bool){
+        if which == "aadhar" {
+            if hide {
+              self.uploadAadharBtn.alpha = 0
+              self.aadharUploaded.alpha = 1
+            }else{
+              self.uploadAadharBtn.alpha = 1
+                self.aadharUploaded.alpha = 0
+
+            }
+        }else{
+            if hide {
+                self.uploadPanBtn.alpha = 0
+                self.panUploaded.alpha = 1
+
+            }else{
+                self.uploadPanBtn.alpha = 1
+                self.panUploaded.alpha = 0
+            }
+        }
+            
+    }
+    
+    func checkForDocuments(){
+        
+        let urlToFetchForAadhar = URL(string: "http://\(ip)/details/getaadharImage?acc_no=\(self.accNumber!)")
+        
+        AF.request(urlToFetchForAadhar!).responseJSON { response in
+            let jsonData = JSON(response.data as Any)
+            print(jsonData)
+            
+            if jsonData.isEmpty {
+              self.hideButton(which: "aadhar", hide: false)
+            }else{
+                let aadhar_no = jsonData["aadhar"].stringValue
+                let aadhar_url = jsonData["aadhar_url"].stringValue
+                if aadhar_no == "" {
+                    self.hideButton(which: "aadhar", hide: false)
+                }else{
+                    if aadhar_url != "" {
+                        self.hideButton(which: "aadhar", hide: true)
+                        self.isAadharUploaded = true
+                    }else{
+                        self.hideButton(which: "aadhar", hide: false)
+                    }
+                }
+            }
+            
+        }
+        
+        
+        let urlToFetchForPan = URL(string: "http://\(ip)/details/getpanImage?acc_no=\(self.accNumber!)")
+        
+        AF.request(urlToFetchForPan!).responseJSON { response in
+            let jsonData = JSON(response.data as Any)
+            print(jsonData)
+            
+            if jsonData.isEmpty {
+                self.hideButton(which: "pan", hide: false)
+            }else{
+                let aadhar_no = jsonData["pan_no"].stringValue
+                let aadhar_url = jsonData["pan_url"].stringValue
+                if aadhar_no == "" {
+                    self.hideButton(which: "pan", hide: false)
+                }else{
+                    if aadhar_url != "" {
+                        self.hideButton(which: "pan", hide: true)
+                        self.isPanUploaded = true
+                    }else{
+                        self.hideButton(which: "pan", hide: false)
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
+    func animate(_ what:String ,_ int : Int){
+        if what == "aadhar" {
+            self.aadharProgress.alpha = CGFloat(int)
+            if int == 1 {
+                self.aadharProgress.startAnimating()
+            }else{
+                self.aadharProgress.stopAnimating()
+            }
+        }else{
+            self.panProgress.alpha = CGFloat(int)
+            if int == 1 {
+                self.panProgress.startAnimating()
+            }else{
+                self.panProgress.stopAnimating()
+            }
+        }
+        
+    }
+    
+
     
 }

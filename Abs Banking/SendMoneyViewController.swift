@@ -31,6 +31,9 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkInternet(self)
+
+        
         // Do any additional setup after loading the view.
         self.AmountTextOutlet.delegate = self
         self.receiver.delegate = self
@@ -44,7 +47,8 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func SearchBtnAction(_ sender: Any) {
         
-        
+        checkInternet(self)
+
         let receiverAccNumber = self.receiver.text
         
         if(Int(receiverAccNumber!) == accNumber){
@@ -73,6 +77,8 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
                 
             }else{
                 print("nah")
+                self.noteTextView.alpha = 1
+                self.noteTextView.text = "User does not exist"
             }
             
         }
@@ -85,6 +91,9 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func sendMoney(_ sender: Any) {
         
+        checkInternet(self)
+
+        
         let amount = Int(self.AmountTextOutlet.text!)!
         print(amount)
         
@@ -93,8 +102,6 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
             
             let url = URL(string: "http://\(ip)/transactions/makeTransaction?amount=\(amount)&from_acc=\(accNumber!)&to_acc=\(receiverAcc!)")
             
-         //   AF.request(url!).validate()
-           
             AF.request(url!).responseJSON {
                 (responseData) -> Void in
                 let jsonData = JSON(responseData.data as Any)
@@ -107,14 +114,13 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
                 
                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let myAlert = storyboard.instantiateViewController(withIdentifier: "TransactionDoneViewController") as! TransactionDoneViewController
-               myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                 myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                 myAlert.amountText = amount
                 myAlert.dateText = date
                 myAlert.toText = toAcc
                 myAlert.fromAcc = fromAcc
                 myAlert.transactionId = id
-              //  self.present(myAlert, animated: true, completion: nil)
                 self.navigationController?.pushViewController(myAlert, animated: true)
                 
             }
