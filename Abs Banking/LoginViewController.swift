@@ -49,8 +49,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         
         checkInternet(self)
 
-        
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         loginIndicator.style = UIActivityIndicatorView.Style.whiteLarge
         
@@ -61,8 +60,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
             
         self.userName.delegate = self
         self.password.delegate = self
-        // Do any additional setup after loading the view.
-        
+                
         self.userName.addTarget(self, action: #selector(userNameClick), for: .editingChanged)
         self.password.addTarget(self, action: #selector(passwordClick), for: .editingChanged)
 

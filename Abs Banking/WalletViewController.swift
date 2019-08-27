@@ -10,16 +10,24 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+var timer = Timer()
+func inactive(viewController : UIViewController){
+    timer = Timer.scheduledTimer(timeInterval: 10, target: viewController, selector: #selector(WalletViewController.doStuff), userInfo: nil, repeats: true)
+    let resetTimer = UITapGestureRecognizer(target: viewController, action: #selector(WalletViewController.resetTimer));
+    viewController.view.isUserInteractionEnabled=true
+    viewController.view.addGestureRecognizer(resetTimer)
+}
+
 class WalletViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     var accNumber : Int? = 0
     var accBal : Int? = 0
     var transactionArray = [[String:AnyObject]]()
+    var refreshControl = UIRefreshControl()
+
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var remainingBalance: UILabel!
-    
-    //  let ip = "172.20.2.79:9696"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendMoneySegue"{
@@ -47,6 +55,19 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
 
         self.tableView.reloadData()
         
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for:.valueChanged)
+        tableView.addSubview(refreshControl)
+
+        inactive(viewController : self)
+
+    }
+    
+    @objc func pullToRefresh(){
+        print("refreshing")
+        checkInternet(self)
+        loadBalance()
+        refreshControl.endRefreshing()
+        loadTransactions();
     }
     
     func loadBalance(){
@@ -118,25 +139,24 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
     }
     
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         var dict = transactionArray[indexPath.row]
-        
+
         let id = dict["id"]
         let fromAcc = dict["fromAcc"]
         let toAcc = dict["toAcc"]
         let amount = dict["amount"]
         let date = dict["date"]
-        
+
         let result = "id: \(id!) \nFrom Account: \(fromAcc!)\nTo Account: \(toAcc!)\nAmount: \(amount!) \nDate: \(date!)"
-        
+
         let alertController = UIAlertController(title: "Transaction Details ", message: result, preferredStyle: .alert)
-        
+
         alertController.addAction(UIAlertAction(title: "Dismiss" , style: .default ))
-        
+
         self.present(alertController,animated: true,completion: nil)
-        
+
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -148,6 +168,29 @@ class WalletViewController: UIViewController , UITableViewDelegate, UITableViewD
         self.loadBalance()
         self.loadTransactions()
     }
+    
+    @objc func doStuff() {
+        // perform any action you wish to
+        let alertController = UIAlertController(title: "Session TimeOut", message: "your session has been time out \n please login again", preferredStyle: UIAlertController.Style.alert)
+        let saveAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            print("User has been inactive for more than 3 Minutes.")
+          
+            let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            self.navigationController?.pushViewController(newdevice, animated: true)
+            
+            timer.invalidate()
+            
+        })
+        alertController.addAction(saveAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func resetTimer() {
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 180, target: self, selector: #selector(WalletViewController.doStuff), userInfo: nil, repeats: true)
+    }
+    
+    
     
 }
 

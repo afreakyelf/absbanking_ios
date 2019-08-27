@@ -16,7 +16,7 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
     var mobileNumber : Int?
     var password : String?
     var isThisForSignUp : Bool? = false
-    var signUpUrl : URL?
+    var signUpUrl : URL!
     
     @IBOutlet weak var otpField: UITextField!
     override func viewDidLoad() {
@@ -63,6 +63,7 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
         }
         
         if isThisForSignUp!{
+            print(self.signUpUrl!)
             AF.request(self.signUpUrl!).validate()
         }
         

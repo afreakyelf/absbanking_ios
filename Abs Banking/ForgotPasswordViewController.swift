@@ -20,6 +20,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     var otpVerified : Bool?
     var phoneNumber : Int?
     
+    
+    @IBOutlet weak var otpSendtoLabel: UILabel!
+    @IBOutlet weak var enterTheOtpLabel: UILabel!
+    @IBOutlet weak var submitOtpBtn: UIButton!
+    
     @IBOutlet weak var otptextField: UITextField!
     @IBOutlet weak var mobileNumber: UILabel!
     
@@ -66,8 +71,13 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             self.phoneNumber = jsonData["phone"].intValue
             print(self.phoneNumber!)
             self.sendOTPFunction(self.phoneNumber!)
+         
+            [self.otpSendtoLabel, self.enterTheOtpLabel, self.mobileNumber, self.otptextField , self.submitOtpBtn].forEach {
+                $0?.alpha = 1
+            }
             
         }
+        
     }
     
     func sendOTPFunction(_ phone : Int){
@@ -75,6 +85,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         self.mobileNumber.text = "\(phone)"
         
         let phoneNumber = "+91\(phone)"
+        print("otp send to \(phoneNumber)")
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             if error != nil {
                 return
@@ -90,7 +101,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBAction func verify(_ sender: Any) {
         
         checkInternet(self)
-
         
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         
@@ -131,7 +141,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         UserDefaults.standard.set(newRepwd, forKey: "\(self.phoneNumber!)")
 
-        let url = URL(string: "http://\(ip)/details/updatePasswd?acc_no=\(self.userId.text!)")
+        let url = URL(string: "http://\(ip)/details/updatePasswd?acc_no=\(self.userId.text!)&passwd=\(newRepwd)")
 
         AF.request(url!).validate()
         
