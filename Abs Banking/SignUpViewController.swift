@@ -31,6 +31,11 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        [firstName,lastName,phone,dob,aadharNumber,panNumber,zipCode,password].forEach {
+            setPadding($0)
+        }
+        
         checkInternet(self)
 
         firstName.borderProperties()
@@ -70,6 +75,7 @@ class SignUpViewController: UIViewController {
             let zipCodeText = zipCode.text!
             let passwordText = password.text!
             
+         
             
             let url = "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)&passwd=\(passwordText)"
             print(url)

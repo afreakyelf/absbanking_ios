@@ -13,9 +13,9 @@ import FirebaseAuth
 let ip = "localhost:9595"
 
 func setPadding(_ uiTextField : UITextField) {
-        let paddingView = UIView(frame: CGRectMake(0, 0, 15, self.uiTextField.frame.height))
-        uiTextField.leftView = paddingView
-        uiTextField.leftViewMode = UITextFieldViewMode.Always
+    let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: uiTextField.frame.height))
+    uiTextField.leftView = paddingView
+    uiTextField.leftViewMode = UITextField.ViewMode.always
 }
 
 func checkInternet(_ viewcontroller: UIViewController){
@@ -53,6 +53,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        [userName,password].forEach {
+            setPadding($0)
+        }
         
         checkInternet(self)
 

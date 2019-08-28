@@ -35,7 +35,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         checkInternet(self)
-                
+        
+        [otptextField,newRePassword,newPassword,userId].forEach {
+            setPadding($0)
+        }
+        
         super.viewDidLoad()
         otptextField.delegate = self
         newPassword.delegate = self
