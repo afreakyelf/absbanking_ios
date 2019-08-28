@@ -13,14 +13,11 @@ import SwiftyJSON
 
 class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
 
-    //let ip = "172.20.2.79:9696"
-  //  let ip = "localhost:9595"
-
-    
     var otpVerified : Bool?
     var phoneNumber : Int?
     
     
+    @IBOutlet weak var wrongOtp: UILabel!
     @IBOutlet weak var otpSendtoLabel: UILabel!
     @IBOutlet weak var enterTheOtpLabel: UILabel!
     @IBOutlet weak var submitOtpBtn: UIButton!
@@ -38,7 +35,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         checkInternet(self)
-
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         super.viewDidLoad()
         otptextField.delegate = self
@@ -46,6 +44,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         newRePassword.delegate = self
         otptextField.textContentType = .oneTimeCode
         self.userId.delegate = self
+        
+        self.newRePassword.addTarget(self, action: #selector(newRePwd), for: .editingChanged)
         
     }
     
@@ -114,10 +114,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             if ((error) != nil) {
                 // Handles error
                 print("Error")
+                self.wrongOtp.alpha = 1
                 return
             }
             print("Success")
-            
+            self.wrongOtp.alpha = 0
             self.newPassword.alpha = 1
             self.newRePassword.alpha = 1
             self.createBtn.alpha = 1
@@ -136,6 +137,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         let newRepwd = self.newRePassword.text!
         
         if(newpwd != newRepwd){
+            self.wrongOtp.text = "Passwords are not matching"
+            self.wrongOtp.alpha = 1
             return
         }
         
@@ -155,6 +158,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
+    @objc
+    func newRePwd(_ textField : UITextField) {
+        self.wrongOtp.alpha = 0
+    }
     
 }

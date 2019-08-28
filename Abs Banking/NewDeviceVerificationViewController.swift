@@ -13,6 +13,9 @@ import Alamofire
 
 class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate {
 
+    
+    @IBOutlet weak var wrongOtpLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     var mobileNumber : Int?
     var password : String?
     var isThisForSignUp : Bool? = false
@@ -29,11 +32,18 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
         
         self.sendOTPFunction(self.mobileNumber!)
 
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        indicator.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+        
+        indicator.color = UIColor.white
         
     }
     
 
     @IBAction func verifyOtp(_ sender: Any) {
+        
+        indicator.startAnimating()
         
         checkInternet(self)
 
@@ -44,10 +54,13 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
         let opt = self.otpField.text
         
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID ?? "",verificationCode: opt!)
+        
         Auth.auth().signIn(with: credential) { authData, error in
             if ((error) != nil) {
                 // Handles error
                 print("Error")
+                self.indicator.stopAnimating()
+                self.wrongOtpLabel.alpha = 1
                 return
             }
             print("Success")
@@ -60,11 +73,15 @@ class NewDeviceVerificationViewController: UIViewController,UITextFieldDelegate 
                     break
                 }
             }
+            
+            self.indicator.stopAnimating()
+            
         }
         
         if isThisForSignUp!{
             print(self.signUpUrl!)
             AF.request(self.signUpUrl!).validate()
+            indicator.stopAnimating()
         }
         
         

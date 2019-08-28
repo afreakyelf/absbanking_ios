@@ -12,7 +12,7 @@ import SwiftyJSON
 
 var timer = Timer()
 func inactive(viewController : UIViewController){
-    timer = Timer.scheduledTimer(timeInterval: 10, target: viewController, selector: #selector(WalletViewController.doStuff), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 180, target: viewController, selector: #selector(WalletViewController.doStuff), userInfo: nil, repeats: true)
     let resetTimer = UITapGestureRecognizer(target: viewController, action: #selector(WalletViewController.resetTimer));
     viewController.view.isUserInteractionEnabled=true
     viewController.view.addGestureRecognizer(resetTimer)

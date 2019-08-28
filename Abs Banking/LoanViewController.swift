@@ -142,7 +142,7 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
             let url = URL(string: "http://\(ip)/loan/insertloan/?accNum=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dol=\(result1)&duration=\(newMonthLoanValue!)")
             //   print(url ?? <#default value#>);
             AF.request(url!).validate();
-            
+            AF.request(URL(string: "http://\(ip)/details/tookLoan?acc_no=\(self.accNumber!)")!).validate()
             self.loadLoan()
             
             

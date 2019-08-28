@@ -8,9 +8,11 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class SignUpViewController: UIViewController {
     
+    @IBOutlet weak var signUpindicator: UIActivityIndicatorView!
     @IBOutlet weak var mylabel: UILabel!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
@@ -31,6 +33,12 @@ class SignUpViewController: UIViewController {
         
         checkInternet(self)
 
+        signUpindicator.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        signUpindicator.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+        
+        signUpindicator.color = UIColor.white
+        
         chooseDate()
         // Do any additional setup after loading the view.
     }
@@ -40,6 +48,8 @@ class SignUpViewController: UIViewController {
         checkInternet(self)
 
         if checkUserInputs() {
+            
+            animate(1)
             
             let firstNameText = firstName.text!
             let lastNameText = lastName.text!
@@ -55,12 +65,31 @@ class SignUpViewController: UIViewController {
             print(url)
             let signUpQuery = URL(string: url)
             print(signUpQuery!)
-            let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
-            newdevice.mobileNumber = Int(phoneText)
-            newdevice.password = passwordText
-            newdevice.isThisForSignUp = true
-            newdevice.signUpUrl = signUpQuery!
-            self.navigationController?.pushViewController(newdevice, animated: true)
+            
+            let urlForCheckinguser = "http://\(ip)/details/checkRegister?acc_no=\(phoneText)"
+            print(urlForCheckinguser)
+            
+            AF.request(URL(string: urlForCheckinguser)!).responseJSON {
+                (responseData) -> Void in
+                let jsonData = JSON(responseData.data as Any)
+                let isExist = jsonData["isExist"].boolValue
+                
+                if isExist{
+                    print("user already exists")
+                    let alert = UIAlertController(title: "Alert!", message: "Number is already registered! Please try again with different Phone Number ", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.destructive, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    self.animate(0)
+                }else{
+                    let newdevice = self.storyboard?.instantiateViewController(withIdentifier: "NewDeviceVerificationViewController") as! NewDeviceVerificationViewController
+                    newdevice.mobileNumber = Int(phoneText)
+                    newdevice.password = passwordText
+                    newdevice.isThisForSignUp = true
+                    newdevice.signUpUrl = signUpQuery!
+                    self.navigationController?.pushViewController(newdevice, animated: true)
+                    self.animate(0)
+                }
+            }
         }
 
        
@@ -126,7 +155,6 @@ class SignUpViewController: UIViewController {
                 if(checkPan(value: self.panNumber.text!)){
                     if(checkPin(value: self.zipCode.text!)){
                         if(self.password.text!.count >= 8){
-                            mylabel.text = "success"
                             return true
                         } else{
                             mylabel.text = "Mimimum Password Length is 8"
@@ -154,5 +182,14 @@ class SignUpViewController: UIViewController {
         
     }
     
+    
+    func animate(_ int : Int){
+        self.signUpindicator.alpha = CGFloat(int)
+        if(int==1){
+            self.signUpindicator.startAnimating()
+        }else{
+            self.signUpindicator.stopAnimating()
+        }
+    }
 
 }
