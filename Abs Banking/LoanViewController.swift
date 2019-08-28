@@ -23,6 +23,7 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
     }
     
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var panUploaded: UILabel!
     @IBOutlet weak var panProgress: UIActivityIndicatorView!
     @IBOutlet weak var aadharProgress: UIActivityIndicatorView!
@@ -48,6 +49,13 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
         checkInternet(self)
         loadLoan()
         checkForDocuments()
+        
+        indicator.style = UIActivityIndicatorView.Style.whiteLarge
+        
+        indicator.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))
+        
+        indicator.color = UIColor.white
+        
         
         panProgress.style = UIActivityIndicatorView.Style.whiteLarge
         
@@ -109,7 +117,6 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
     @IBAction func NewLoneActionBtn(_ sender: Any) {
         
         checkInternet(self)
-
         
         let pleaseAlert = UIAlertController(title: "Alert", message: "Please Upload Mandatory Documents", preferredStyle: .alert)
         pleaseAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
@@ -118,6 +125,7 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
             let pleaseAlert = UIAlertController(title: "Alert", message: "Please Upload Mandatory Documents", preferredStyle: .alert)
             pleaseAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
             self.present(pleaseAlert,animated: true,completion: nil)
+            animateLoanIndicator(0)
             return
         }
         
@@ -129,6 +137,10 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
             textField.placeholder = "Enter the Duration in months"
         }
         let saveAction = UIAlertAction(title: "Get Loan", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            
+            self.animateLoanIndicator(1)
+
+            
             let date=Date();
             let formatter=DateFormatter();
             formatter.dateFormat="dd.MM.yyyy"
@@ -140,18 +152,19 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
             
             //var newloanoulet.alpha=0
             let url = URL(string: "http://\(ip)/loan/insertloan/?accNum=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dol=\(result1)&duration=\(newMonthLoanValue!)")
-            //   print(url ?? <#default value#>);
-            AF.request(url!).validate();
+       
+            AF.request(url!).responseJSON{_ in
+                self.loadLoan()
+            }
+            
             AF.request(URL(string: "http://\(ip)/details/tookLoan?acc_no=\(self.accNumber!)")!).validate()
-            self.loadLoan()
-            
-            
-            
             
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {
-            (action : UIAlertAction!) -> Void in })
+            (action : UIAlertAction!) -> Void in
+            self.animateLoanIndicator(0)
+        })
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
@@ -168,6 +181,7 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
             if jsonData.isEmpty {
                 self.newloanoulet.isHidden=false
                 self.emi.isHidden=true
+                self.animateLoanIndicator(0)
             }else{
                 let amount = jsonData["amount"].doubleValue
                 print(amount)
@@ -176,6 +190,7 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
                 self.newloanoulet.isHidden = true
                 self.emi.isHidden=false
                 self.emi.text=self.emiCal(amount, months )
+                self.animateLoanIndicator(0)
             }
             
         }
@@ -379,6 +394,14 @@ class LoanViewController: UIViewController ,UIImagePickerControllerDelegate ,UIN
         
     }
     
+    func animateLoanIndicator(_ int : Int){
+        self.indicator.alpha = CGFloat(int)
+        if(int==1){
+            self.indicator.startAnimating()
+        }else{
+            self.indicator.stopAnimating()
+        }
+    }
 
     
 }

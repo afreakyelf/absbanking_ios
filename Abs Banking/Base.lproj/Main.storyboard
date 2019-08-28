@@ -637,7 +637,7 @@
                                     <action selector="verifyOtp:" destination="FFz-XT-cQc" eventType="touchUpInside" id="0hE-fd-aCI"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="THB-Mx-Sfm">
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="THB-Mx-Sfm">
                                 <rect key="frame" x="197" y="359" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
@@ -929,7 +929,7 @@
                                     <action selector="NewLoneActionBtn:" destination="Lup-hy-7xZ" eventType="touchUpInside" id="Ckx-OZ-HY8"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-c1-TGI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5N-c1-TGI">
                                 <rect key="frame" x="20" y="317" width="374" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -965,6 +965,10 @@
                                 <rect key="frame" x="294" y="153" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Lhg-md-AXP">
+                                <rect key="frame" x="197" y="327" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="N08-Hj-QqZ"/>
@@ -978,6 +982,7 @@
                         <outlet property="aadharProgress" destination="XVJ-6p-OyL" id="EMZ-Mz-0UX"/>
                         <outlet property="aadharUploaded" destination="Cfg-FA-oDC" id="qnk-oa-kKD"/>
                         <outlet property="emi" destination="q5N-c1-TGI" id="KYK-PZ-cbo"/>
+                        <outlet property="indicator" destination="Lhg-md-AXP" id="vIr-B1-Hpi"/>
                         <outlet property="newloanoulet" destination="vbA-Wf-0FL" id="tL8-cL-RU1"/>
                         <outlet property="panProgress" destination="n8F-gC-ioc" id="APn-8F-Sqg"/>
                         <outlet property="panUploaded" destination="1Ni-iU-qfj" id="nEM-kc-kKv"/>

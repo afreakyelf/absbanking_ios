@@ -33,7 +33,6 @@ class SendMoneyViewController: UIViewController, UITextFieldDelegate {
         
         checkInternet(self)
 
-        
         // Do any additional setup after loading the view.
         self.AmountTextOutlet.delegate = self
         self.receiver.delegate = self

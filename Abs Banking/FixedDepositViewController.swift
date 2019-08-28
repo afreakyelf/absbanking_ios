@@ -46,7 +46,6 @@ class FixedDepositViewController: UIViewController {
         
         checkInternet(self)
 
-        
         let alertController = UIAlertController(title: "Make a fixed Deposit", message: "", preferredStyle: UIAlertController.Style.alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter the amount"
@@ -66,9 +65,9 @@ class FixedDepositViewController: UIViewController {
             
             let url = URL(string: "http://\(ip)/fixed/insertfd?acc_no=\(self.accNumber!)&amount=\(alertController.textFields![0].text!)&dod=\(result1)&duration=\(newMonthLoanValue!)")
             
-            AF.request(url!).validate();
-            
+            AF.request(url!).responseJSON { (response) -> Void in
             self.loadFixedDeposit()
+            }
             
         })
         
