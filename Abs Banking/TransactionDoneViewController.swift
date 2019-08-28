@@ -17,16 +17,21 @@ class TransactionDoneViewController: UIViewController {
     var fromAcc : Int?
     var transactionId : Int?
     
+    @IBOutlet weak var TransactionCardOutlet: UIView!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var completed: UILabel!
     @IBOutlet weak var toEmail: UILabel!
     @IBOutlet weak var to: UILabel!
+    @IBOutlet weak var dismisOutlet: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dismisOutlet.buttonProperties()
+        TransactionCardOutlet.cardProperties()
         
         self.navigationItem.setHidesBackButton(true, animated: true)
 

@@ -33,6 +33,16 @@ class SignUpViewController: UIViewController {
         
         checkInternet(self)
 
+        firstName.borderProperties()
+        lastName.borderProperties()
+        phone.borderProperties()
+        dob.borderProperties()
+        aadharNumber.borderProperties()
+        panNumber.borderProperties()
+        zipCode.borderProperties()
+        password.borderProperties()
+        
+        
         signUpindicator.style = UIActivityIndicatorView.Style.whiteLarge
         
         signUpindicator.sizeThatFits(CGSize.init(width: 30.0, height: 30.0))

@@ -35,9 +35,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         checkInternet(self)
-        
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
+                
         super.viewDidLoad()
         otptextField.delegate = self
         newPassword.delegate = self
