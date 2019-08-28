@@ -78,7 +78,6 @@
                                     <color key="titleColor" red="1" green="0.4265212538" blue="0.044869704220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="blah:" destination="itS-vA-jgY" eventType="touchUpInside" id="NPg-WB-FL2"/>
                                     <segue destination="lTX-wB-oa9" kind="show" identifier="forgotPasswordSegue" id="yzs-Yv-yZD"/>
                                 </connections>
                             </button>

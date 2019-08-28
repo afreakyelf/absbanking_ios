@@ -12,12 +12,14 @@ import SwiftyJSON
 import FirebaseAuth
 let ip = "localhost:9595"
 
+//To set padding in UITextFields
 func setPadding(_ uiTextField : UITextField) {
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: uiTextField.frame.height))
     uiTextField.leftView = paddingView
     uiTextField.leftViewMode = UITextField.ViewMode.always
 }
 
+//To check internet connections
 func checkInternet(_ viewcontroller: UIViewController){
     if !NetworkHelper.isConnectedToNetwork(){
         let alert = UIAlertController(title: "No Internet Connection", message: "Please check you mobile data or Wifi", preferredStyle: .alert)
@@ -39,13 +41,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     
     @IBOutlet weak var loginButton: UIButton!
     
-    
-//  let ip = "172.20.2.79:9696"
-
-    @IBAction func blah(_ sender: Any) {
-    }
-    
-    
     var mobileNumber = 0
     var pBool = false
 
@@ -54,7 +49,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
         super.viewDidLoad()
         
         [userName,password].forEach {
-            setPadding($0)
+            setPadding($0!)
         }
         
         checkInternet(self)

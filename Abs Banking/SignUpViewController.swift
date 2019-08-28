@@ -23,8 +23,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var zipCode: UITextField!
     @IBOutlet weak var password: UITextField!
     
-   // let ip = "172.20.2.79:9696"
-  //  let ip = "localhost:9595"
     
     let datePickerView : UIDatePicker = UIDatePicker()
 
@@ -74,8 +72,6 @@ class SignUpViewController: UIViewController {
             let panNumberText = panNumber.text!
             let zipCodeText = zipCode.text!
             let passwordText = password.text!
-            
-         
             
             let url = "http://\(ip)/details/insert?aadhar=\(aadharNumberText)&pan=\(panNumberText)&f_name=\(firstNameText)&l_name=\(lastNameText)&phone=\(phoneText)&dob=\(dobText)&zip=\(zipCodeText)&passwd=\(passwordText)"
             print(url)
