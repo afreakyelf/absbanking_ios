@@ -47,6 +47,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         checkInternet(self)
 
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -144,6 +145,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate  {
                 self.wrongpass.alpha = 1
             }
         }
+        
+        self.userName.text = ""
+        self.password.text = ""
+        self.userName.becomeFirstResponder()
     }
     
     

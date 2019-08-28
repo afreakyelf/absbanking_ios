@@ -37,12 +37,14 @@ PODS:
   - GoogleUtilities/Reachability (6.2.3):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.2)
+  - Kingfisher (5.7.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
   - Firebase/Auth
   - Firebase/Storage
+  - Kingfisher (~> 5.0)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -55,6 +57,7 @@ SPEC REPOS:
     - FirebaseStorage
     - GoogleUtilities
     - GTMSessionFetcher
+    - Kingfisher
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -66,8 +69,9 @@ SPEC CHECKSUMS:
   FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 8fb2f7f7ec13618d70ef4ae46c74fad1102ad76d
+PODFILE CHECKSUM: 07159f229b051833fb4cd48554971fedf9cc1e6b
 
 COCOAPODS: 1.7.5

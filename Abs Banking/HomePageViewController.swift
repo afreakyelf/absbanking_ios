@@ -10,6 +10,7 @@ import UIKit
 
 class HomePageViewController: UIViewController {
 
+    @IBOutlet weak var gotoprofile: UIButton!
     @IBOutlet weak var welcomeText: UILabel!
     var accNumber : Int? = 0
     @IBOutlet weak var walletButton: UIButton!
@@ -51,6 +52,9 @@ class HomePageViewController: UIViewController {
             let S = segue.destination as! FixedDepositViewController
             S.accNumber = accNumber!
 
+        } else if segue.identifier == "profileSegue"{
+            let S = segue.destination as! ProfileViewController
+            S.accNumber = accNumber!
         }
         
     }

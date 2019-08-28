@@ -10,5 +10,6 @@ target 'Abs Banking' do
   pod 'SwiftyJSON'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Kingfisher', '~> 5.0'
 
 end
