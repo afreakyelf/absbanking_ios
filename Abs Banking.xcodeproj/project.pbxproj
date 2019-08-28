@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1876A484230EBA0700D3D252 /* NewDeviceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */; };
-		1889B6A523152AF60084444E /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B6A423152AF60084444E /* NetworkHelper.swift */; };
+		1889B6A723163C920084444E /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889B6A623163C920084444E /* NetworkHelper.swift */; };
 		188B8929230FF7570061D607 /* TransactionDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B8928230FF7570061D607 /* TransactionDoneViewController.swift */; };
 		18943021230E7B510038A94F /* FixedDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18943020230E7B510038A94F /* FixedDepositViewController.swift */; };
 		189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		1876A483230EBA0700D3D252 /* NewDeviceVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDeviceVerificationViewController.swift; sourceTree = "<group>"; };
-		1889B6A423152AF60084444E /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkHelper.swift; path = ../../../Downloads/NetworkHelper.swift; sourceTree = "<group>"; };
+		1889B6A623163C920084444E /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		188B8928230FF7570061D607 /* TransactionDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDoneViewController.swift; sourceTree = "<group>"; };
 		18943020230E7B510038A94F /* FixedDepositViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedDepositViewController.swift; sourceTree = "<group>"; };
 		189A9BF1230D3B9D005A6964 /* SendMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +94,6 @@
 		18A38BBF230986AF0047DD0F /* Abs Banking */ = {
 			isa = PBXGroup;
 			children = (
-				1889B6A423152AF60084444E /* NetworkHelper.swift */,
 				18A38BC0230986AF0047DD0F /* AppDelegate.swift */,
 				18A38BC2230986AF0047DD0F /* ViewController.swift */,
 				18A38BC4230986AF0047DD0F /* Main.storyboard */,
@@ -112,6 +111,7 @@
 				189A9BF5230DBC2C005A6964 /* ForgotPasswordViewController.swift */,
 				18943020230E7B510038A94F /* FixedDepositViewController.swift */,
 				188B8928230FF7570061D607 /* TransactionDoneViewController.swift */,
+				1889B6A623163C920084444E /* NetworkHelper.swift */,
 			);
 			path = "Abs Banking";
 			sourceTree = "<group>";
@@ -240,7 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1889B6A523152AF60084444E /* NetworkHelper.swift in Sources */,
+				1889B6A723163C920084444E /* NetworkHelper.swift in Sources */,
 				18A38BD32309885A0047DD0F /* SignUpViewController.swift in Sources */,
 				188B8929230FF7570061D607 /* TransactionDoneViewController.swift in Sources */,
 				189A9BF2230D3B9D005A6964 /* SendMoneyViewController.swift in Sources */,
